@@ -3,15 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Basic Calculator</title>
 </head>
 <body>
     <div id="main">
         <form name="f">
-            <input type="text" name="textinput">
-            <input type="button" value="1" onclick="f.textinput.value +=1 "
+            <input type="text" name="textInput" placeholder="0" id="textInput" ><br>
+            <input type="button" value="1" onclick="f.textInput.value +=1 ">
+            <input type="button" value="2" onclick="f.textInput.value +=2 ">
+            <input type="button" value="3" onclick="f.textInput.value +=3 ">
+            <input type="button" value="+" onclick="modalFunc(this.value)">
+            <br>
+            <input type="button" value="4" onclick="f.textInput.value +=4 ">
+            <input type="button" value="5" onclick="f.textInput.value +=5 ">
+            <input type="button" value="6" onclick="f.textInput.value +=6 ">
+            <input type="button" value="-" onclick="modalFunc(this.value)">
+            <br>
+            <input type="button" value="7" onclick="f.textInput.value +=7 ">
+            <input type="button" value="8" onclick="f.textInput.value +=8 ">
+            <input type="button" value="9" onclick="f.textInput.value +=9 ">
+            <input type="button" value="/" onclick="modalFunc(this.value) ">
+            <br>
+            <input type="button" value="c" onclick="f.textInput.value ='' ">
+            <input type="button" value="0" onclick="f.textInput.value +=0 ">
+            <input type="button" id="result" value="=" onclick="calculate()">
+            <input type="button" value="x" onclick="modalFunc(this.value)">
+            <br>
+            <input type="button" value="sin" onclick="applyTrigFunction('sin')">
+            <input type="button" value="cos" onclick="applyTrigFunction('cos')">
+            <input type="button" value="tan" onclick="applyTrigFunction('tan')">
+            <input type="button" value="√" onclick="calculateSquareRoot()">
+            <input type="button" value="←" onclick="handleKeyPress(event)">
+
+            <br>
         </form>
     </div>
-    
+
+    <script>
+        function modalFunc(separator) {
+            let act = f.textInput.value;
+            let b = act.charAt(act.length - 1);
+
+            if (b === '+' || b === '-' || b === '/' || b === '*') {
+                f.textInput.value = act.substring(0, act.length - 1);
+                f.textInput.value += separator;
+            } else {
+                f.textInput.value += separator;
+            }
+        }
+        function applyTrigFunction(trigFunction) {
+            let inputValue = parseFloat(f.textInput.value);
+            
+            if (!isNaN(inputValue)) {
+                switch (trigFunction) {
+                    case 'sin':
+                        f.textInput.value = Math.sin(inputValue);
+                        break;
+                    case 'cos':
+                        f.textInput.value = Math.cos(inputValue);
+                        break;
+                    case 'tan':
+                        f.textInput.value = Math.tan(inputValue);
+                        break;
+                }
+            }
+        }
+        function calculate() {
+           
+                if(f.textInput.value !== ''){
+                    f.textInput.value = eval(f.textInput.value);
+                    
+                }
+           
+        }
+
+
+        function handleKeyPress(event) {
+         
+                f.textInput.value = f.textInput.value.slice(0, -1);
+
+            }
+            function calculateSquareRoot() {
+            let inputValue = parseFloat(f.textInput.value);
+            
+            if (!isNaN(inputValue) && inputValue >= 0) {
+                f.textInput.value = Math.sqrt(inputValue);
+            } else {
+                f.textInput.value = 'Error';
+            }
+        }
+        
+    </script>
 </body>
 </html>
