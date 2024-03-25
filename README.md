@@ -1,5 +1,6 @@
 # Calculator
 
+![Calculator Preview](https://ibb.co/Df5qsSj)
 This is a simple calculator application built using HTML and CSS. It performs basic arithmetic operations and includes trigonometric functions and square root calculation.
 
 ## Features
